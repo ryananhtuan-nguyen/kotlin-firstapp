@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "http://localhost:4000/"
+    private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -13,7 +13,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val userService: UserService by lazy {
-        retrofit.create(UserService::class.java)
+    val postService: PostService by lazy {
+        retrofit.create(PostService::class.java)
     }
 }

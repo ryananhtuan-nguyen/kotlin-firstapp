@@ -1,8 +1,5 @@
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,32 +10,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newapplication.model.UserResponse
-import com.example.newapplication.viewmodel.UserViewModel
+import com.example.newapplication.model.PostResponse
+import com.example.newapplication.viewmodel.PostViewModel
 
 
 @Composable
-fun UserScreen(viewModel: UserViewModel) {
-    val user by viewModel.user.observeAsState(null)
+fun PostScreen(viewModel: PostViewModel) {
+    val posts by viewModel.post.observeAsState(null)
 
     LaunchedEffect(Unit) {
-        viewModel.fetchUser()
+        viewModel.getPosts()
     }
 
     Column {
-        if (user == null) {
+        if (posts == null) {
             // Show loading indicator or placeholder
             Text(text = "Loading...")
         } else {
             // Display the list of credit cards
-            UserItem(user!!)
+            PostItem(posts!!)
         }
     }
 }
 
 
 @Composable
-fun UserItem(user: UserResponse) {
+fun PostItem(post: PostResponse) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,19 +48,24 @@ fun UserItem(user: UserResponse) {
                 .fillMaxWidth()
         ) {
             Text(
-                text = "ID: ${user.id}",
+                text = "ID: ${post.id}",
                 style = MaterialTheme.typography.h6
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "First Name: ${user.firstName}",
+                text = "UserId: ${post.userId}",
                 style = MaterialTheme.typography.body1,
                 color = Color.Blue,
                 fontSize = 40.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Last Name: ${user.lastName}",
+                text = "Title: ${post.title}",
+                style = MaterialTheme.typography.body1
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Body: ${post.body}",
                 style = MaterialTheme.typography.body1
             )
         }
