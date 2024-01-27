@@ -16,7 +16,7 @@ import com.example.newapplication.viewmodel.PostViewModel
 
 @Composable
 fun PostScreen(viewModel: PostViewModel) {
-    val posts by viewModel.post.observeAsState(null)
+    val posts by viewModel.posts.observeAsState(null)
 
     LaunchedEffect(Unit) {
         viewModel.getPosts()
@@ -35,39 +35,43 @@ fun PostScreen(viewModel: PostViewModel) {
 
 
 @Composable
-fun PostItem(post: PostResponse) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        elevation = 4.dp
-    ) {
-        Column(
+fun PostItem(posts: List<PostResponse>) {
+    for (post in posts) {
+        Card(
             modifier = Modifier
-                .padding(16.dp)
                 .fillMaxWidth()
+                .padding(16.dp),
+            elevation = 4.dp
         ) {
-            Text(
-                text = "ID: ${post.id}",
-                style = MaterialTheme.typography.h6
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "UserId: ${post.userId}",
-                style = MaterialTheme.typography.body1,
-                color = Color.Blue,
-                fontSize = 40.sp
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Title: ${post.title}",
-                style = MaterialTheme.typography.body1
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Body: ${post.body}",
-                style = MaterialTheme.typography.body1
-            )
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = "ID: ${post.id}",
+                    style = MaterialTheme.typography.body1,
+                    color = Color.Red
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "UserId: ${post.userId}",
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Blue,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Title: ${post.title}",
+                    style = MaterialTheme.typography.body1,
+                    fontSize = 20.sp
+
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Body: ${post.body}",
+                    style = MaterialTheme.typography.body1
+                )
+            }
         }
     }
 }
