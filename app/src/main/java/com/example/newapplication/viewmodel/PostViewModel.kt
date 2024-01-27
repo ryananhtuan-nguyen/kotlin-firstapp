@@ -13,10 +13,13 @@ class PostViewModel : ViewModel() {
     private val repository = PostRepository()
 
     private val _post = MutableLiveData<PostResponse>()
+    private val _posts = MutableLiveData<List<PostResponse>>()
 
     val post: LiveData<PostResponse> = _post
 
-    fun getPosts(){
+    val posts: LiveData<List<PostResponse>> = _posts
+
+    fun getPost(){
         viewModelScope.launch {
             try{
                 val post = repository.getPost()
@@ -24,6 +27,19 @@ class PostViewModel : ViewModel() {
                 Log.e("Fetch Posts", _post.value.toString())
             }catch(e: Exception){
                 Log.e("Fetch posts", e.message.toString())
+            }
+        }
+    }
+
+    fun getPosts(){
+        viewModelScope.launch {
+            try {
+                val posts = repository.getPosts()
+                _posts.value = posts
+                Log.e("Fetch all posts", _post.value.toString())
+
+            }catch(e:Exception){
+                Log.e("Fetch all posts", e.message.toString())
             }
         }
     }
