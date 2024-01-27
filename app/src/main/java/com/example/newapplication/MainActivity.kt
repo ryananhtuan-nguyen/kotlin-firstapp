@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
 
         setContent{
             ComposeMVVMTheme{
-                Surface(modifier = Modifier.fillMaxSize(), color=MaterialTheme.colors.background) {
+                Surface(color=MaterialTheme.colors.background) {
                     PostScreen(viewModel)
                 }
             }
