@@ -10,4 +10,8 @@ class PostRepository {
     suspend fun getPost(): PostResponse {
         return postService.getPost()
     }
+
+    suspend fun getPosts(): List<PostResponse>{
+        return postService.getPosts()
+    }
 }
